@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Press+Start+2P&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>DEKO'S</title>
+  </head>
+  <body>
+    <!-- Navbar top -->
+    <div class="navbar-top">
+      <div class="title">
+        <h1>DEKO's</h1>
+      </div>
+
+      <!-- Navbar -->
+      <ul>
+        <li>
+          <link rel="stylesheet" type="text/css" href="styles.css" />
+          <a href="login.html">
+            <i class="fa fa-sign-out-alt fa-2x"></i>
+          </a>
+        </li>
+      </ul>
+      <!-- End -->
+    </div>
+    <!-- End -->
+
+    <!-- Sidenav -->
+    <div class="sidenav">
+      <link rel="stylesheet" type="text/css" href="styles.css" />
+      <div class="profile">
+        <img
+          src="https://media.istockphoto.com/id/1382459400/pt/vetorial/young-black-man-face-with-beard-male-portrait-or-avatar-in-flat-style-front-view-vector.jpg?s=1024x1024&w=is&k=20&c=dKMDM7P1_sd72-tKa4RzDlxqkuTWne0SPKCbUogiJDI="
+        />
+        <div class="name"></div>
+      </div>
+
+      <div class="sidenav-url">
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <div class="url">
+          <a href="index.html" class="active">Página Inicial</a>
+        </div>
+        <div class="url">
+          <a href="./cadastro.html">Cadastrar produtos</a>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <h2>Perfil</h2>
+      <div class="card">
+        <div class="card-body">
+          <i class="fa fa-pen fa-xs edit"></i>
+          <div class="u">
+            <strong>Nome:</strong> <span id="userName"></span>
+          </div>
+          <div>
+            <strong>Email:</strong> <span id="userEmail"></span>
+          </div>
+          <div>
+            <strong>Endereço:</strong> <span id="userAddress"></span>
+          </div>
+          <div>
+            <strong>Telefone:</strong> <span id="userPhone"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+        <h2>Produtos cadastrados</h2>
+        <div class="card">
+          <div class="card-body">
+            <i class="fa fa-pen fa-xs edit"></i>
+            <div class="u">
+            </div>
+          </div>
+        </div>
+
+
+
+    <script type="module">
+        // Importe os módulos aqui, no escopo global do script
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+    
+        document.addEventListener("DOMContentLoaded", async function () {
+            const firebaseConfig = {
+                apiKey: "AIzaSyAkufawz-dH_T5HpAXcXFxYIBJbVxDc63E",
+                authDomain: "dekos-d8638.firebaseapp.com",
+                databaseURL: "https://dekos-d8638-default-rtdb.firebaseio.com",
+                projectId: "dekos-d8638",
+                storageBucket: "dekos-d8638.appspot.com",
+                messagingSenderId: "11869747396",
+                appId: "1:11869747396:web:7464e47e0dd85584a47191",
+            };
+    
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth();
+            const db = getFirestore(app);
+    
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    // O usuário está autenticado, atualize os campos com as informações do usuário
+                    console.log("User is authenticated:", user);
+    
+                    // Atualize o campo 'userName' com o nome de exibição do usuário ou um valor padrão
+
+    
+                    // Atualize o campo 'userEmail' com o email do usuário ou um valor padrão
+                    document.getElementById("userEmail").innerText = user.email || "Email não disponível";
+    
+                    // Atualize o campo 'userAddress' e 'userPhone' com os dados do Firestore
+                    const userDocRef = doc(db, "users", user.uid);
+    
+                    try {
+                        const userDoc = await getDoc(userDocRef);
+    
+                        if (userDoc.exists()) {
+                            const userData = userDoc.data();
+    
+                            // Atualize os campos com os dados do Firestore, ou um valor padrão se não estiver disponível
+                            document.querySelector(".profile .name").innerText = userData.name || "Nome não disponível";
+                            document.getElementById("userAddress").innerText = userData.address || "Endereço não disponível";
+                            document.getElementById("userPhone").innerText = userData.phone || "Telefone não disponível";
+                            document.getElementById("userName").innerText = userData.name || user.displayName || "Nome não disponível";
+                        } else {
+                            console.log("Document does not exist");
+                        }
+                    } catch (error) {
+                        console.error("Error getting user document:", error);
+                    }
+                }
+            });
+        });
+    </script>
+  </body>
+</html>

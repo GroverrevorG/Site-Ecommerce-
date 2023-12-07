@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEKO's</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="page">
+      <a href="index.html" class="back-button"></a>
+      <form method="POST" class="formLogin" id="signupForm">
+        <h1>Cadastrar</h1>
+        <p>Digite os seus dados para acesso nos campos abaixo.</p>
+        <label for="username">Nome</label>
+        <input
+          type="text"
+          placeholder="Digite seu nome e sobrenome"
+          autofocus="true"
+          id="username"
+        />
+        <label for="email">Email</label>
+        <input type="email" placeholder="Digite seu e-mail" id="email" maxlength="254" />
+        <label for="text">Endereço</label>
+        <input type="text" placeholder="Digite seu endereço" id="address" maxlength="60" />
+        <label for="tel">Número de telefone</label>
+        <input type="tel" placeholder="(DDD)99999-9999" id="phone" maxlength="14" />
+        <label for="password">Senha</label>
+        <input type="password" placeholder="Digite sua senha de até 6 dígitos" id="password" minlength="6" />
+        <input type="submit" value="Criar Conta" class="btn" />
+      </form>
+      <a href="login.html" class="btn">Voltar para Login</a>
+      <div id="email-in-use-alert" style="display: none;">
+        <h2>Email Já Cadastrado</h2>
+        <p>Usuário já cadastrado. Faça login ou escolha outro email.</p>
+        <button onclick="closeEmailInUseAlert()">OK</button>
+      </div>
+
+      <div id="invalid-email-alert" style="display: none;">
+        <h2>Email Inválido</h2>
+        <p>E-mail inválido. Por favor, forneça um e-mail válido.</p>
+        <button onclick="closeInvalidEmailAlert()">OK</button>
+      </div>
+
+      <div id="custom-alert" style="display: none;">
+        <h2>Usuário Criado!</h2>
+        <p>Sua conta foi criada com sucesso.</p>
+        <button onclick="closeCustomAlert()">OK</button>
+      </div>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+      import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+      import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAkufawz-dH_T5HpAXcXFxYIBJbVxDc63E",
+        authDomain: "dekos-d8638.firebaseapp.com",
+        databaseURL: "https://dekos-d8638-default-rtdb.firebaseio.com",
+        projectId: "dekos-d8638",
+        storageBucket: "dekos-d8638.appspot.com",
+        messagingSenderId: "11869747396",
+        appId: "1:11869747396:web:7464e47e0dd85584a47191",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+
+      document.getElementById("signupForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const name = document.getElementById("username").value;
+        const address = document.getElementById("address").value;
+        const phone = document.getElementById("phone").value;
+
+        try {
+          // Cria o usuário no Firebase Authentication
+          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+
+          // Adiciona informações do usuário ao Firestore
+          await setDoc(doc(db, "users", user.uid), {
+            name: name,
+            email: email,
+            address: address,
+            phone: phone,
+          });
+
+          // Exibe mensagem de sucesso
+          document.getElementById("custom-alert").style.display = "block";
+
+          // Redireciona para a página de login após 4 segundos
+          setTimeout(() => {
+            window.location.href = "./login.html";
+          }, 4000);
+        } catch (error) {
+          // Trata os erros durante o processo de criação do usuário
+          if (error.code === "auth/email-already-in-use") {
+            alert("Usuário já cadastrado. Faça login ou escolha outro email.");
+          } else if (error.code === "auth/invalid-email") {
+            alert("E-mail inválido. Por favor, forneça um e-mail válido.");
+          } else if (error.code === 'auth/weak-password') {
+            alert('A senha deve ter pelo menos 6 caracteres.');
+          } else {
+            alert(error.message);
+          }
+        }
+      });
+
+      // Funções de fechar alertas
+      function closeEmailInUseAlert() {
+        document.getElementById("email-in-use-alert").style.display = "none";
+      }
+
+      function closeInvalidEmailAlert() {
+        document.getElementById("invalid-email-alert").style.display = "none";
+      }
+
+      function closeCustomAlert() {
+        document.getElementById("custom-alert").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

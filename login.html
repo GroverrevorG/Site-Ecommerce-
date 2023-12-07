@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEKO's</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="page">
+      <a href="index.html" class="back-button"></a>
+      <form method="POST" class="formLogin" id="loginForm">
+        <h1>Login</h1>
+        <p>Digite os seus dados de acesso no campo abaixo.</p>
+        <label for="email">E-mail</label>
+        <input
+          type="email"
+          placeholder="Digite seu e-mail"
+          autofocus="true"
+          id="email"
+          name="email"
+        />
+        <span id="emailError" class="error-message"></span>
+        <label for="password">Senha</label>
+        <span id="passwordError" class="error-message"></span>
+        <input type="password" placeholder="Digite sua senha" id="password" />
+        <a href="/">Esqueci minha senha</a>
+        <p class="inscrever">
+          Não tem uma conta? <a href="./signup.html">Inscreva-se</a>
+        </p>
+        <input type="submit" value="Acessar" class="btn" />
+      </form>
+    </div>
+
+    <script type="module">
+      // Importa o Firebase
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+
+      // Configuração do Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyAkufawz-dH_T5HpAXcXFxYIBJbVxDc63E",
+        authDomain: "dekos-d8638.firebaseapp.com",
+        databaseURL: "https://dekos-d8638-default-rtdb.firebaseio.com",
+        projectId: "dekos-d8638",
+        storageBucket: "dekos-d8638.appspot.com",
+        messagingSenderId: "11869747396",
+        appId: "1:11869747396:web:7464e47e0dd85584a47191",
+      };
+
+      // Inicializa o Firebase
+      const app = initializeApp(firebaseConfig);
+
+      // Adiciona o event listener após a inicialização do Firebase
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+
+          var email = document.getElementById("email").value;
+          var password = document.getElementById("password").value;
+
+          try {
+            const auth = getAuth();
+            const userCredential = await signInWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+
+            // Autenticação bem-sucedida, redireciona para a página de perfil
+            window.location.href = "./profile.html";
+          } catch (error) {
+            // Trata o erro de autenticação
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            if (errorCode === "auth/invalid-email") {
+              alert("Email inválido!");
+            } else if (errorCode === "auth/missing-password") {
+              alert("Senha inválida!");
+            } else if (errorCode === "auth/invalid-login-credentials") {
+              alert("Senha inválida!");
+            } else if (errorCode === "auth/too-many-requests") {
+              alert("Tente novamente mais tarde!");
+            } else {
+              alert(errorMessage);
+            }
+          }
+        });
+
+      const btnLogin = document.querySelector(".btn");
+      btnLogin.disabled = true;
+
+      // Adicione um event listener ao formulário para habilitar o botão quando o formulário estiver preenchido
+      document
+        .getElementById("loginForm")
+        .addEventListener("input", function () {
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          btnLogin.disabled = !email || !password;
+        });
+
+    </script>
+  </body>
+</html>

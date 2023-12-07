@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Press+Start+2P&family=Roboto&display=swap" rel="stylesheet">
+    <title>DEKO'S</title>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <a href="index.html" class="logo"><span class="logo-d">D</span>E<span class="logo-k">K</span>O'S</a>
+      </div>
+      
+      <ul class="navigation">
+        <li><a href="produtos.html">Produtos</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><a href="login.html">Poste seus produtos</a></li>
+      </ul>
+      <div class="toggle_btn">
+        <i class='fa-solid fa-bars'></i>
+        </div>
+    
+    <div class="dropdown_menu">
+      <ul>
+      <li><a href="produtos.html">Produtos</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="login.html">Poste seus produtos</a></li>
+      </ul>
+    </div>
+
+    <div class="header-icons">
+        <a href="#" id="cart-icon" class="icon-link"><i class="bx bx-cart"></i></a>
+        <div id="menu"><a href="login.html" class="icon-link"><i class="bx bx-user user-icon"></i></a></div>
+      </div>
+      
+  </header>
+
+  <main>
+
+    <div class="search-container">
+        <h1>Procure sua Action Figure</h1>
+        <div class="search">
+            <input type="text" id="search-input" placeholder="Pesquise seu produto">
+        </div>
+    </div>
+
+<div class="no-find">
+    <h1 id="no-results-message">Nenhum produto encontrado</h1>
+</div>
+
+<!-- Adicionando produto -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2 id="modal-title"></h2>
+        <img id="modal-image" src="" alt="">
+        <p id="modal-description"></p>
+        <button class="buy-button">Comprar</button>
+        <p class="success-message">Produto adicionado no carrinho!</p>
+
+    </div>
+</div>
+
+<!-- Produto no carrinho -->
+<div class="modal2">
+    <div class="modal-content2">
+        <h2>Carrinho</h2>
+        <span class="close">&times;</span>
+        <div id="products-container"></div>
+        <p class="total-price">Total: R$ 0.00</p>
+        <button class="buy-button-modal2">Finalizar compra</button>
+    </div>
+</div>
+
+<!-- Mensagem de sucesso -->
+<div class="success-modal" id="success-modal">
+    <div class="success-modal-content">
+        <h2>Compra Finalizada</h2>
+        <p>Sua compra foi realizada com sucesso!</p>
+        <span class="close-success-modal">&times;</span>
+    </div>
+</div>
+
+<div class="card-container">
+    <div class="card">
+        <img src="img/figure-hatsune.jpg" alt="Hatsune">
+        <div class="card-text">
+            <h2>Hatsune</h2>
+            <p>Original taito vocaloid hatsune miku figura 2019 12th, 20cm </p>
+            <br>
+            <h4>R$ 156,00</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-edward.webp" alt="Edward">
+        <div class="card-text">
+            <h2>Edward Elric</h2>
+            <p>PVC Anime Action Figure, Fullmetal Alchemist, 22cm </p>
+            <br>
+            <h4>R$ 138,90</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-shanks.webp" alt="Shanks">
+        <div class="card-text">
+            <h2>Shanks</h2>
+            <p>Shanks One Piece World, PVC Anime Action Figure, 24cm </p>
+            <br>
+            <h4>R$ 197,67</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-luffy.webp" alt="Luffy">
+        <div class="card-text">
+            <h2>Luffy</h2>
+            <p>Monkey D. Luffy Stamped Movie, One Piece 20cm</p>
+            <br>
+            <h4>R$ 230,43</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-nami.jpg" alt="Nami">
+        <div class="card-text">
+            <h2>Nami</h2>
+            <p>Nami treasure cruise world, One Piece 20cm</p>
+            <br>
+            <h4>R$ 178,70</h4>
+        </div>
+    </div>
+</div>
+
+<!--Segunda fileira-->
+
+<div class="card-container">
+    <div class="card">
+        <img src="img/figure-Himiko.jpg" alt="Himiko">
+        <div class="card-text">
+            <h2>Himiko Toga</h2>
+            <p>My Hero Academia, Banpresto, Colosseum, 22cm</p>
+            <br>
+            <h4>R$ 161,99</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-naruto.jpg" alt="Naruto">
+        <div class="card-text">
+            <h2>Naruto</h2>
+            <p>Naruto – Sage Mode / Rasenshuriken, Original, 29cm</p>
+            <br>
+            <h4>R$ 310,10</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-hashibira.jpeg" alt="Hashibira">
+        <div class="card-text">
+            <h2>Hashibira</h2>
+            <p>Hashibira Inosuke, Demon Slayer (Kimetsu), 25cm</p>
+            <br>
+            <h4>R$ 253,00</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-ochaco.jpg" alt="Ochaco">
+        <div class="card-text">
+            <h2>Ochaco</h2>
+            <p>Ochaco Uraraka, My Hero Academia Banpresto, 24cm
+            </p>
+            <br>
+            <h4>R$ 135,50</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-Shigaraki.webp" alt="Shigaraki">
+        <div class="card-text">
+            <h2>Shigaraki</h2>
+            <p>Shigaraki Tomura, My Hero Academia, Banpresto, Colosseum, 22cm</p>
+            <br>
+            <h4>R$ 178,90</h4>
+        </div>
+    </div>
+</div>
+
+<!-- Terceira fileira -->
+
+<div class="card-container">
+    <div class="card">
+        <img src="img/figure-hatsuneMiku.jpg" alt="Hatsune Miku">
+        <div class="card-text">
+            <h2>Hatsune Miku</h2>
+            <p>Hatsune Miku, Project Diva, Sakura Version 2019 Taito, 16cm</p>
+            <br>
+            <h4>R$ 101,99</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-albedo.webp" alt="Albedo">
+        <div class="card-text">
+            <h2>Albedo</h2>
+            <p>Albedo – Overlord, colecionador, original, 24cm</p>
+            <br>
+            <h4>R$ 282,43</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-itachi.jpg" alt="Itachi Uchiha">
+        <div class="card-text">
+            <h2>Itachi Uchiha</h2>
+            <p>Itachi Uchiha, Naruto Shippuden Vibration Stars, 18cm</p>
+            <br>
+            <h4>R$ 148,90</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-hatsuneDiva.jpg" alt="Hatsune Miku">
+        <div class="card-text">
+            <h2>Hatsune Miku</h2>
+            <p>Hatsune Miku, Project Diva Arcade Future Tone SEGA, 20cm</p>
+            <br>
+            <h4>R$ 152,50</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-berserker.jpeg" alt="Berserker">
+        <div class="card-text">
+            <h2>Berserker</h2>
+            <p>Berserker of Black – Fate/Apocrypha, Taito, 24cm</p>
+            <br>
+            <h4>R$ 238,90</h4>
+        </div>
+    </div>
+</div>
+
+<!-- Quarta fileira -->
+<div class="card-container">
+    <div class="card">
+        <img src="img/figure-narmaya.jpg" alt="Narmaya ">
+        <div class="card-text">
+            <h2>Narmaya </h2>
+            <p>Narmaya – Granblue Fantasy, Taito, 19cm</p> 
+            <br>
+            <h4>R$ 190,80</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-shimakaze.jpg" alt="Shimakaze">
+        <div class="card-text">
+            <h2>Shimakaze</h2>
+            <p>Shimakaze Love Kanmusume, Taito, 15cm</p>
+            <br>
+            <h4>R$ 100,00</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-shanksVol2.jpg" alt="Shanks">
+        <div class="card-text">
+            <h2>Shanks</h2>
+            <p>Shanks – One Piece World, Banpresto Colosseum, 23cm</p>
+            <br>
+            <h4>R$ 149,90</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-roronoa.jpg" alt="Roronoa Zoro">
+        <div class="card-text">
+            <h2>Roronoa Zoro</h2>
+            <p>Roronoa Zoro, The Grandline Men, One PieceBanpresto, 25cm</p>
+            <br>
+            <h4>R$ 200,10</h4>
+        </div>
+    </div>
+    <div class="card">
+        <img src="img/figure-hatsune-diva.jpg" alt="Hatsune">
+        <div class="card-text">
+            <h2>Hatsune</h2>
+            <p>Hatsune Miku, Project Diva, Sakura Version 2020, Taito</p>
+            <br>
+            <h4>R$ 218,90</h4>
+        </div>
+    </div>
+</div>
+  </main>
+<footer>
+  <div class="footer-container">
+    <div class="footer-section">
+        <h3 id="contato">Contatos</h3>
+        <p>Email: dekos@exemplo.com</p>
+        <p>Telefone: (079) 990963-7890</p>
+    </div>
+   
+    <div class="footer-section">
+      <h3>Mais</h3>
+      <a href="produtos.html">Compre aqui</a>
+      <a href="/login.html">Faça seu login</a>
+        <a href="/login.html">Poste seu produto aqui</a>
+    </div>
+</div>
+</footer>
+
+  <script src="script.js"></script>
+
+</body>

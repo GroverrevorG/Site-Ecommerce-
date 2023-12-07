@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Press+Start+2P&family=Roboto&display=swap" rel="stylesheet">
+    <title>DEKO'S - Cadastro de Produto</title>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <a href="index.html" class="logo"><span class="logo-d">D</span>E<span class="logo-k">K</span>O'S</a>
+      </div>
+      
+      <ul class="navigation">
+        <li><a href="produtos.html">Produtos</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><a href="index.html">Inicio</a></li>
+      </ul>
+      <div class="toggle_btn">
+        <i class='fa-solid fa-bars'></i>
+        </div>
+    
+    <div class="dropdown_menu">
+      <ul>
+      <li><a href="produtos.html">Produtos</a></li>
+      <li><a href="#contatos">Contato</a></li>
+      </ul>
+    </div>
+
+      <div class="header-icons">
+        <div id="menu"><a href="login.html" class="icon-link"><i class="bx bx-user user-icon"></i></a></div>
+      </div>
+    </div>
+   
+  </header>
+
+    
+<!-- Produto no carrinho -->
+<div class="modal2">
+  <div class="modal-content2">
+      <h2>Carrinho</h2>
+      <span class="close">&times;</span>
+      <div id="products-container"></div>
+      <p class="total-price">Total: R$ 0.00</p>
+      <button class="buy-button-modal2">Finalizar compra</button>
+  </div>
+</div>
+
+<!-- Mensagem de sucesso -->
+<div class="success-modal" id="success-modal">
+  <div class="success-modal-content">
+      <h2>Compra Finalizada</h2>
+      <p>Sua compra foi realizada com sucesso!</p>
+      <span class="close-success-modal">&times;</span>
+  </div>
+</div>
+  
+  <h1>Cadastrar Novo Produto</h1>
+  <div class="container">
+      <form id="productForm">
+          <label for="productName">Nome do Produto:</label>
+          <input type="text" id="productName" placeholder="Digite o nome do produto" required><br>
+          
+          <label for="productDescription">Descrição do Produto:</label>
+          <textarea id="productDescription"placeholder="Digite a descrição do produto" required></textarea><br>
+
+          <label for="productDescription">Imagem do Produto:</label>
+          <div class="upload-container">
+            <div class="image-preview" id="image-preview"></div>
+            <label for="file-input" class="upload-button">ENVIAR IMAGEM DO PRODUTO</label>
+            <input type="file" id="file-input" accept="image/*" style="display:none">
+          </div>
+          
+          <label for="productQuantity">Quantidade:</label>
+          <input type="number" id="productQuantity"placeholder="Digite a quantidade" required><br>
+          
+          <label for="productPrice">Preço Unitário:</label>
+          <input type="number" id="productPrice" placeholder="Digite o preço unitário" required><br>
+
+          <input type="submit" value="Cadastrar">
+      </form>
+
+      <div id="message"></div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3 id="contato">Contatos</h3>
+            <p>Email: dekos@exemplo.com</p>
+            <p>Telefone: (079) 990963-7890</p>
+        </div>
+       
+        <div class="footer-section">
+          <h3>Mais</h3>
+          <a href="produtos.html">Compre aqui</a>
+          <a href="#">Faça seu login</a>
+            <a href="#">Poste seu produto aqui</a>
+        </div>
+    </div>
+</footer>
+
+<script src="script2.js"></script>
+</body>

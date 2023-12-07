@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Press+Start+2P&family=Roboto&display=swap" rel="stylesheet">
+    <title>DEKO'S</title>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <a href="index.html" class="logo"><span class="logo-d">D</span>E<span class="logo-k">K</span>O'S</a>
+      </div>
+      
+      <ul class="navigation">
+        <li><a href="produtos.html">Produtos</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><a href="login.html">Poste seus produtos</a></li>
+      </ul>
+      <div class="toggle_btn">
+        <i class='fa-solid fa-bars'></i>
+      </div>
+    
+    <div class="dropdown_menu">
+      <ul>
+      <li><a href="produtos.html">Produtos</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="login.html">Poste seus produtos</a></li>
+      </ul>
+    </div>
+
+    <div class="header-icons">
+      <a href="#" id="cart-icon" class="icon-link"><i class="bx bx-cart"></i></a>
+      <div id="menu"><a href="login.html" class="icon-link"><i class="bx bx-user user-icon"></i></a></div>
+    </div>
+    </header>
+  
+  <main>
+
+    
+<!-- Produto no carrinho -->
+<div class="modal2">
+  <div class="modal-content2">
+      <h2>Carrinho</h2>
+      <span class="close">&times;</span>
+      <div id="products-container"></div>
+      <p class="total-price">Total: R$ 0.00</p>
+      <button class="buy-button-modal2">Finalizar compra</button>
+  </div>
+</div>
+
+<!-- Mensagem de sucesso -->
+<div class="success-modal" id="success-modal">
+  <div class="success-modal-content">
+      <h2>Compra Finalizada</h2>
+      <p>Sua compra foi realizada com sucesso!</p>
+      <span class="close-success-modal">&times;</span>
+  </div>
+</div>
+
+<!-- Principal -->
+   <section class="home">
+    
+    <div class="button-container">
+      <button class="image-button" data-image="img/figure-hatsune.jpg">
+          <img src="img/figure-hatsune.jpg" alt="Hatsune">
+      </button>
+      <button class="image-button" data-image="img/figure-edward.webp">
+          <img src="img/figure-edward.webp" alt="Edward">
+      </button>
+      <button class="image-button" data-image="img/figure-shanks.webp">
+          <img src="img/figure-shanks.webp" alt="Shanks">
+      </button>
+      <button class="image-button" data-image="img/figure-luffy.webp">
+        <img src="img/figure-luffy.webp" alt="Luffy">
+    </button>
+    <button class="image-button" data-image="img/figure-nami.jpg">
+      <img src="img/figure-nami.jpg" alt="Nami">
+  </button>
+  </div>
+
+  <div class="image-container">
+      <img id="displayed-image" src="img/figure-hatsune.jpg" alt="Hatsune">
+  </div>
+    <div class="home-text">
+      <h1>Action Figures</h1>
+      <h5>As melhores Action Figures você encontra aqui</h5>
+      <h3>A partir de 100 reais</h3>
+      <a href="produtos.html" class="btn">Compre agora</a>
+    </div>
+   </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3 id="contato">Contatos</h3>
+            <p>Email: dekos@exemplo.com</p>
+            <p>Telefone: (079) 990963-7890</p>
+        </div>
+       
+        <div class="footer-section">
+          <h3>Mais</h3>
+          <a href="produtos.html">Compre aqui</a>
+          <a href="./login.html">Faça seu login</a>
+            <a href="./login.html">Poste seu produto aqui</a>
+        </div>
+    </div>
+</footer>
+
+    <script src="script.js"></script>
+</body>
+<script type="module">
+  // Importa o Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+
+  // Configuração do Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyAkufawz-dH_T5HpAXcXFxYIBJbVxDc63E",
+        authDomain: "dekos-d8638.firebaseapp.com",
+        databaseURL: "https://dekos-d8638-default-rtdb.firebaseio.com",
+        projectId: "dekos-d8638",
+        storageBucket: "dekos-d8638.appspot.com",
+        messagingSenderId: "11869747396",
+        appId: "1:11869747396:web:7464e47e0dd85584a47191",
+  };
+
+  // Inicializa o Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  onAuthStateChanged(auth, (user) => {
+    const userIconLink = document.querySelector(".header-icons .user-icon");
+
+    if (user) {
+      // Se o usuário estiver autenticado, redireciona para a página de perfil
+      userIconLink.href = "profile.html";
+    } else {
+      // Se o usuário não estiver autenticado, redireciona para a página de login
+      userIconLink.href = "login.html";
+    }
+  });
+</script>
+</html>
